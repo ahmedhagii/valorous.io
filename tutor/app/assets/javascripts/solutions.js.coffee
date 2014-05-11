@@ -345,6 +345,8 @@ debug_console = ->
 			clear_console()
 			stop_spin()
 			toggle_code_area()
+			unless IsJson data
+				return
 			if data['compiler_error']
 				compilation_error(data['compiler_output'])
 				return
@@ -386,3 +388,10 @@ debug_console = ->
 	template += "\tpublic static void main(String [] args) {\n\t\t\n\t}\n}"
 	edit_session.setValue(template);
 	return
+
+IsJson = (str) ->
+    try
+        JSON.parse str
+        true
+    catch e
+        false
