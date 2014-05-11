@@ -10,7 +10,7 @@ index_number = 0
 # Returns: none
 # Author: Mussab ElDash
 @start_debug = (problem_id) ->
-	input = $('#solution_code').val()
+	input = editor.getValue()
 	if input.length is 0
 		alert "You didn't write any code"
 		return
@@ -48,7 +48,8 @@ index_number = 0
 #	none
 # Author: Ahmed Akram
 @compile = (problem_id) ->
-	input = $('#solution_code').val()
+	input = editor.getValue()
+	alert input
 	if input.length is 0
 		alert "You didn't write any code"
 		return
@@ -82,7 +83,7 @@ index_number = 0
 #	none
 # Author: Ahmed Akram
 @run_input = (problem_id) ->
-	code = $('#solution_code').val()
+	code = editor.getValue()
 	if code.length is 0
 		alert "You didn't write any code"
 		return
@@ -327,7 +328,7 @@ debug_console = ->
 #	and the success and failure messages are displayed in a table
 # Author: MOHAMEDSAEED
 @validate_code = (problem_id) ->
-	code = $('#solution_code').val()
+	code = editor.getValue()
 	mins = parseInt($('#mins').text())
 	secs = parseInt($('#secs').text())
 	time = (mins * 60) + secs
@@ -382,11 +383,10 @@ debug_console = ->
 # Returns: none
 # Author: MOHAMEDSAEED
 @reload_template = () -> 	
-	editor = ace.edit("editor");
-	edit_session = editor.getSession();
+	editor = getEditor
 	template = "public class CoolSoft {\n"
 	template += "\tpublic static void main(String [] args) {\n\t\t\n\t}\n}"
-	edit_session.setValue(template);
+	editor.setValue(template);
 	return
 
 IsJson = (str) ->
@@ -395,3 +395,7 @@ IsJson = (str) ->
         true
     catch e
         false
+
+getEditor = ->
+	editor = ace.edit "editor"
+	editor.getSession()
