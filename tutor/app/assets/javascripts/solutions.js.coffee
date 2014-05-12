@@ -17,12 +17,13 @@ index_number = 0
 		alert "You didn't write any code"
 		return
 	test = $('#solution_input').val()
+	class_name = $("#class_name").val()
 	start_spin()
 	toggle_code_area()
 	$.ajax
 		type: "POST"
 		url: '/debuggers/' + problem_id
-		data: {code : input , case : test}
+		data: {code: input, case: test, class_name: class_name}
 		datatype: 'json'
 		success: (data) ->
 			clear_console()
@@ -94,12 +95,13 @@ index_number = 0
 		alert "You didn't write any code"
 		return
 	test = $('#solution_input').val()
+	class_name = $("#class_name").val()
 	start_spin()
 	toggle_code_area()
 	$.ajax
 		type: "POST"
 		url: '/solutions/execute'
-		data: {code : code, problem_id : problem_id, input : test}
+		data: {code: code, problem_id: problem_id, input: test, class_name: class_name}
 		datatype: 'json'
 		success: (data) ->
 			clear_console()
@@ -344,11 +346,12 @@ debug_console = ->
 		alert 'Blank submissions are not allowed'
 		return
 	toggle_code_area()
+	class_name = $("#class_name").val()
 	start_spin()	
 	$.ajax
 		type: "POST"
 		url: '/solutions'
-		data: {problem_id: problem_id, code: code, time: time}
+		data: {problem_id: problem_id, code: code, time: time, class_name: class_name}
 		datatype: 'json'
 		success: (data) ->
 			clear_console()

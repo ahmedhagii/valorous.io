@@ -16,8 +16,9 @@ class DebuggersController < ApplicationController
 		id = current_student.id
 		pid = params[:id]
 		code = params[:code]
+		class_name = params[:class_name]
 		cases = if params[:case] then params[:case] else "" end
-		result = SolutionsLayer.debug "java", code, id, pid, cases
+		result = SolutionsLayer.debug "java", code, id, pid, class_name, cases
 		render json: result
 	end
 
